@@ -1,0 +1,41 @@
+---
+import path from "path";
+import Layout from "../../layouts/Layout.astro";
+
+const pages = await Astro.glob("../../../content/pages/*.md");
+
+export const getStaticPaths = () => {
+  return pages.map((page) => {
+    return {
+      params: {
+        slug: path.basename(page.file).replace(".md", ""),
+      },
+    };
+  });
+};
+
+const { slug } = Astro.params;
+
+const page = pages.find(
+  (page) => path.basename(page.file).replace(".md", "") === slug
+);
+
+console.log(page);
+
+if (!page) {
+  const error = await fetch(`${Astro.url}/404`);
+  return new Response(error.body, {
+    headers: error.headers,
+    status: 404,
+    statusText: "Not Found",
+  });
+}
+
+const { Content } = page;
+---
+
+<Layout title={page?.frontmatter.title}>
+  <article class="prose">
+    <Content />
+  </article>
+</Layout>

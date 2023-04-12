@@ -1,11 +1,10 @@
 ---
-const posts = await Astro.glob("../../content/posts/*.md");
-const content = posts[0].compiledContent();
-console.log(posts[0].rawContent());
+import { Header } from "../components/Header";
+import Layout from "../layouts/Layout.astro";
+// const content = posts[0].compiledContent();
+// console.log(posts[0].rawContent());
 ---
 
-<p class="text-red-900">Post Archive:</p>
-
-<article class="prose">
-  {posts.map(({ Content }) => <Content />)}
-</article>
+<Layout title="New Creation Realities">
+  <p class="text-red-900">Post Archive:</p>
+</Layout>
