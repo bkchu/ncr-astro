@@ -1,19 +1,22 @@
 import { isSidebarOpen } from "@/stores/sidebar";
+import { cn } from "@/utils/cn";
 import { Transition } from "@headlessui/react";
 import { useStore } from "@nanostores/react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import clsx from "clsx";
 import { Menu, X } from "lucide-react";
 import { Fragment } from "react";
+import path from "path";
 
 interface SidebarProps {
   links: {
     title: string;
     href: string;
   }[];
+  slug?: string;
 }
 
-export const Sidebar = ({ links }: SidebarProps) => {
+export const Sidebar = ({ links, slug }: SidebarProps) => {
   // const isOpen = true;
   const isOpen = useStore(isSidebarOpen);
 
@@ -68,12 +71,18 @@ export const Sidebar = ({ links }: SidebarProps) => {
                   </button>
                 </DialogPrimitive.Close>
               </div>
-              <nav className="bg-gray-100">
+              <nav className="bg-gray-100 h-full">
                 <ul>
                   {links.map((link) => (
                     <li>
                       <a
-                        className="block h-full w-full cursor-pointer px-4 py-2"
+                        className={cn(
+                          "block h-full w-full cursor-pointer px-4 py-2",
+                          {
+                            "bg-ncr-primary/50":
+                              slug && link.href.split("/").pop() === slug,
+                          }
+                        )}
                         onClick={() => {
                           isSidebarOpen.set(false);
 

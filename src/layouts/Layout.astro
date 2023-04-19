@@ -12,12 +12,14 @@ const links = pages.map((page) => {
     href: `/page/${path.basename(page.file).split(".")[0]}`,
   };
 });
+
+const { slug } = Astro.params;
 ---
 
 <BaseLayout title={title}>
   <main>
     <Header />
-    <Sidebar links={links} client:only />
+    <Sidebar slug={slug} links={links} client:only />
     <slot />
   </main>
 </BaseLayout>
