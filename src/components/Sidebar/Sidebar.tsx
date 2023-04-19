@@ -71,13 +71,14 @@ export const Sidebar = ({ links, slug }: SidebarProps) => {
                   </button>
                 </DialogPrimitive.Close>
               </div>
-              <nav className="bg-gray-100 h-full">
+              <nav className="h-full bg-gray-100">
                 <ul>
                   {links.map((link) => (
                     <li>
-                      <a
+                      <button
+                        role="link"
                         className={cn(
-                          "block h-full w-full cursor-pointer px-4 py-2",
+                          "block h-full w-full cursor-pointer px-4 py-2 text-left",
                           {
                             "bg-ncr-primary/50":
                               slug && link.href.split("/").pop() === slug,
@@ -92,7 +93,7 @@ export const Sidebar = ({ links, slug }: SidebarProps) => {
                         }}
                       >
                         {link.title}
-                      </a>
+                      </button>
                     </li>
                   ))}
                 </ul>
