@@ -20,8 +20,6 @@ const page = pages.find(
   (page) => path.basename(page.file).replace(".md", "") === slug
 );
 
-console.log(page);
-
 if (!page) {
   const error = await fetch(`${Astro.url}/404`);
   return new Response(error.body, {
@@ -35,7 +33,11 @@ const { Content } = page;
 ---
 
 <Layout title={page?.frontmatter.title}>
-  <article class="prose">
-    <Content />
-  </article>
+  <div class="px-4 pt-4 pb-20">
+    <article
+      class="prose mx-auto max-w-[45ch] font-serif prose-headings:font-extrabold"
+    >
+      <Content />
+    </article>
+  </div>
 </Layout>

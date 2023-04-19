@@ -5,7 +5,11 @@ import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), react()],
+  integrations: [tailwind(
+    {
+      config: { applyBaseStyles: false },
+    }
+  ), react()],
   output: "server",
   adapter: vercel(),
 });

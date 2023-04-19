@@ -21,6 +21,15 @@ export default defineConfig({
   schema: {
     collections: [
       {
+        ui: {
+          filename: {
+            slugify: (values) =>
+              values?.title
+                ?.toLowerCase()
+                .trim()
+                .replace(/[^a-zA-Z0-9]+/g, "-"),
+          },
+        },
         name: "page",
         label: "Pages",
         path: "content/pages",
