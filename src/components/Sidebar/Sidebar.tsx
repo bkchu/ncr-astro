@@ -71,8 +71,9 @@ export const Sidebar = ({ links }: SidebarProps) => {
               <nav className="bg-gray-100">
                 <ul>
                   {links.map((link) => (
-                    <li className="px-4 py-2">
+                    <li>
                       <a
+                        className="block h-full w-full cursor-pointer px-4 py-2"
                         onClick={() => {
                           isSidebarOpen.set(false);
 
