@@ -55,7 +55,7 @@ export const Sidebar = ({ links }: SidebarProps) => {
                 "fixed z-50",
                 "h-full w-[100vw] max-w-md md:w-full md:rounded-bl-lg md:rounded-tl-lg",
                 "bottom-0 right-0 top-0",
-                "bg-white dark:bg-gray-800",
+                "bg-white",
                 "overflow-clip focus:outline-none focus-visible:ring focus-visible:ring-white focus-visible:ring-opacity-75"
               )}
             >
