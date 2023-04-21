@@ -1,3 +1,4 @@
+import slugify from "slugify";
 import { defineConfig } from "tinacms";
 
 // Your hosting provider likely exposes this as an environment variable
@@ -25,9 +26,8 @@ export default defineConfig({
           filename: {
             slugify: (values) =>
               values?.title
-                ?.toLowerCase()
-                .trim()
-                .replace(/[^a-zA-Z0-9]+/g, "-"),
+                ? slugify(values.title.toLowerCase(), { strict: true })
+                : "",
           },
         },
         name: "page",
