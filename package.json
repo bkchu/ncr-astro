@@ -12,7 +12,7 @@
   "dependencies": {
     "@astrojs/react": "^2.1.1",
     "@astrojs/tailwind": "^3.1.1",
-    "@astrojs/vercel": "^3.2.3",
+    "@astrojs/vercel": "^3.2.4",
     "@fontsource/vollkorn": "^4.5.14",
     "@headlessui/react": "^1.7.14",
     "@nanostores/react": "^0.5.0",
