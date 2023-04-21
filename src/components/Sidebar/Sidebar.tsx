@@ -1,12 +1,15 @@
+import {
+  TableOfContents,
+  TableOfContentsLink,
+} from "@/components/TableOfContents/TableOfContents";
 import { isSidebarOpen } from "@/stores/sidebar";
+import tableOfContents from "@/table-of-contents.json";
 import { cn } from "@/utils/cn";
 import { Transition } from "@headlessui/react";
 import { useStore } from "@nanostores/react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
-import clsx from "clsx";
-import { Menu, X } from "lucide-react";
+import { Menu as MenuIcon, X as XIcon } from "lucide-react";
 import { Fragment } from "react";
-import path from "path";
 
 interface SidebarProps {
   links: {
@@ -17,14 +20,13 @@ interface SidebarProps {
 }
 
 export const Sidebar = ({ links, slug }: SidebarProps) => {
-  // const isOpen = true;
   const isOpen = useStore(isSidebarOpen);
 
   return (
     <DialogPrimitive.Root open={isOpen} onOpenChange={isSidebarOpen.set}>
       <DialogPrimitive.Trigger asChild>
-        <button className="fixed bottom-4 right-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 font-sans">
-          <Menu />
+        <button className="fixed bottom-6 right-6 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 font-sans shadow-xl">
+          <MenuIcon />
         </button>
       </DialogPrimitive.Trigger>
       <DialogPrimitive.Portal forceMount>
@@ -40,7 +42,7 @@ export const Sidebar = ({ links, slug }: SidebarProps) => {
           >
             <DialogPrimitive.Overlay
               forceMount
-              className="fixed inset-0 z-20 bg-black/50"
+              className="fixed inset-0 z-20 bg-black/20"
             />
           </Transition.Child>
           <Transition.Child
@@ -54,49 +56,26 @@ export const Sidebar = ({ links, slug }: SidebarProps) => {
           >
             <DialogPrimitive.Content
               forceMount
-              className={clsx(
+              className={cn(
                 "fixed z-50",
-                "h-full w-[100vw] max-w-md md:w-full md:rounded-bl-lg md:rounded-tl-lg",
-                "bottom-0 right-0 top-0",
-                "bg-white",
+                "w-[calc(100%_-_16px)] rounded-lg md:max-w-sm",
+                "bottom-2 left-2 right-2 top-2 md:left-auto",
+                "bg-white shadow-2xl",
                 "overflow-clip focus:outline-none focus-visible:ring focus-visible:ring-white focus-visible:ring-opacity-75"
               )}
             >
-              {/* sidebar content */}
-              {/* div 48px high full width */}
               <div className="absolute bottom-0 right-0 flex h-12 w-full items-center justify-end bg-black p-2">
                 <DialogPrimitive.Close asChild>
-                  <button className="fixed bottom-4 right-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100">
-                    <X />
+                  <button className="absolute bottom-4 right-4 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 shadow-xl">
+                    <XIcon />
                   </button>
                 </DialogPrimitive.Close>
               </div>
-              <nav className="h-full bg-gray-100">
-                <ul>
-                  {links.map((link) => (
-                    <li>
-                      <button
-                        role="link"
-                        className={cn(
-                          "block h-full w-full cursor-pointer px-4 py-2 text-left",
-                          {
-                            "bg-ncr-primary/50":
-                              slug && link.href.split("/").pop() === slug,
-                          }
-                        )}
-                        onClick={() => {
-                          isSidebarOpen.set(false);
-
-                          setTimeout(() => {
-                            window.location.href = link.href;
-                          }, 300);
-                        }}
-                      >
-                        {link.title}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+              <nav className="h-[calc(100%_-_48px)] overflow-y-scroll bg-white">
+                <TableOfContents
+                  links={tableOfContents as TableOfContentsLink[]}
+                  slug={slug}
+                />
               </nav>
             </DialogPrimitive.Content>
           </Transition.Child>
