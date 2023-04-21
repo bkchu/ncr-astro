@@ -3,7 +3,7 @@ import {
   TableOfContentsLink,
 } from "@/components/TableOfContents/TableOfContents";
 import { isSidebarOpen } from "@/stores/sidebar";
-import tableOfContents from "@/table-of-contents.json";
+import { tableOfContents } from "@/table-of-contents";
 import { cn } from "@/utils/cn";
 import { Transition } from "@headlessui/react";
 import { useStore } from "@nanostores/react";

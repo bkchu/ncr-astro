@@ -1,4 +1,4 @@
-[
+export const tableOfContents = [
   {
     "type": "page",
     "name": "How to Effectively Utilize Confession",
