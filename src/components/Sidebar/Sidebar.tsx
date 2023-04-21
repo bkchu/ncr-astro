@@ -72,10 +72,10 @@ export const Sidebar = ({ links, slug }: SidebarProps) => {
                 </DialogPrimitive.Close>
               </div>
               <nav className="h-[calc(100%_-_48px)] overflow-y-scroll bg-white">
-                <TableOfContents
+                {/* <TableOfContents
                   links={tableOfContents as TableOfContentsLink[]}
                   slug={slug}
-                />
+                /> */}
               </nav>
             </DialogPrimitive.Content>
           </Transition.Child>
