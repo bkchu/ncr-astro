@@ -19,7 +19,7 @@ const { slug } = Astro.params;
 <BaseLayout title={title}>
   <main>
     <Header />
-    <Sidebar slug={slug} links={links} client:load />
+    <Sidebar slug={slug} links={links} client:only />
     <slot />
   </main>
 </BaseLayout>
